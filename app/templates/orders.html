@@ -3,6 +3,43 @@
 {% block content %}
 <h1>
     Order Up!
+    <form action="{{ url_for('.index') }}" method="post">
+        {{ tableForm.csrf_token }}
+        <h5>Assign Table</h5>
+        <div>
+            {{ tableForm.tables.label }} {{ tableForm.tables}}
+        </div>
+        <div>
+            {{ tableForm.servers.label }} {{ tableForm.servers}}
+        </div>
+        <div>
+            {{ tableForm.assign }}
+        </div>
+    </form>
+
+    <form>
+        <h4>Open Orders</h4>
+        <div>
+            {% for order in your_orders %}
+                <p>Table {{ order.table.number }}</p>
+                <button type="submit" formaction="{{ url_for('orders.close_table', order_id =order.id)}}">Close Order</button>
+                <button form="food-list" formaction="{{url_for('orders.add_to_order',order_id=order.id)}}">Add to Order</button>
+            {% endfor %}
+        </div>
+    </form>
+
+    <form>
+        <h3>Listing</h3>
+        <form id="food-list">
+            <!-- {% for item in menu_items %}
+                <div>
+                    <input type="checkbox" name="menu_item_id" value="{{item.name}}"/>
+                    <label for="{{item.name}}">{{item.name}}</label>
+                </div>
+            {% endfor %} -->
+        </form>
+
+    </form>
 </h1>
 
 {% endblock %}
