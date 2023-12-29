@@ -14,4 +14,4 @@ class TableAssignmentForm(FlaskForm):
     assign = SubmitField("Assign")
 
 class MenuItemAssignmentForm(FlaskForm):
-    menu_item_ids = SelectMultipleField("Menu items", coerce=int)
+    menu_items = SelectMultipleField("Menu items", coerce=int)

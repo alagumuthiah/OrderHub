@@ -17,29 +17,31 @@
         </div>
     </form>
 
-    <form>
-        <h4>Open Orders</h4>
-        <div>
-            {% for order in your_orders %}
+    <h4>Open Orders</h4>
+    <div>
+        {% for order in your_orders %}
+            <form action="{{ url_for('orders.close_table', order_id =order.id)}}" method="post">
                 <p>Table {{ order.table.number }}</p>
-                <button type="submit" formaction="{{ url_for('orders.close_table', order_id =order.id)}}">Close Order</button>
-                <button form="food-list" formaction="{{url_for('orders.add_to_order',order_id=order.id)}}">Add to Order</button>
-            {% endfor %}
+                <p>Total Price = ${{order.price}}</p>
+                <button type="submit">Close Order</button>
+            </form>
+            <button type="submit" form="itemsForm" formaction="{{ url_for('orders.add_to_order', order_id=order.id) }}">Add to Order</button>
+        {% endfor %}
+    </div>
+
+    <h3>Listing</h3>
+    <form id="itemsForm" method="post">
+        {{ menu_item_form.csrf_token }}
+        <div>
+            {% for choice, label in menu_item_form.menu_items.choices %}
+            <div>
+                <h3>{{label.type.name}}</h3>
+                <input type="checkbox" name="checkbox" value="{{choice}}">{{label.name}} - ${{label.price}}
+            </div>
+        {% endfor %}
         </div>
     </form>
 
-    <form>
-        <h3>Listing</h3>
-        <form id="food-list">
-            <!-- {% for item in menu_items %}
-                <div>
-                    <input type="checkbox" name="menu_item_id" value="{{item.name}}"/>
-                    <label for="{{item.name}}">{{item.name}}</label>
-                </div>
-            {% endfor %} -->
-        </form>
-
-    </form>
 </h1>
 
 {% endblock %}

@@ -9,7 +9,9 @@ with app.app_context():
     db.create_all()
 
     employee = Employee(name="Margot", employee_number=1234, password="password")
+    employee2 = Employee(name="Regina", employee_number=4567, password="password")
     db.session.add(employee)
+    db.session.add(employee2)
     db.session.commit()
 
     beverages = MenuItemType(name="Beverages")
@@ -21,6 +23,8 @@ with app.app_context():
     fries = MenuItem(name="French fries", price=3.50, type=sides, menu=dinner)
     drp = MenuItem(name="Dr. Pepper", price=1.0, type=beverages, menu=dinner)
     jambalaya = MenuItem(name="Jambalaya", price=21.98, type=entrees, menu=dinner)
+    mocktail = MenuItem(name="Mojito",price=4.5, type=beverages, menu=dinner)
+    paneerdish = MenuItem(name="Paneer Jalfrezi",price=18.65, type=entrees, menu=dinner)
 
     db.session.add(dinner)
     db.session.commit()
